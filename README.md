@@ -93,7 +93,7 @@ flowchart LR
 ### 1. VGG16：通过卷积 Block 构建深层特征提取器
 
 <p align="center">
-  <img src="./assets/images/vgg16_structure.png" width="760" alt="VGG16 structure">
+  <img src="./assets/images/vgg16_structure.png" width="600" alt="VGG16 structure">
 </p>
 
 VGG 的核心思想是使用多个连续的 `3×3` 小卷积核构建深层网络。相比直接使用大卷积核，连续小卷积核的堆叠可以在保持有效感受野的同时增加非线性表达能力，并使网络结构更加规则、清晰。
@@ -142,26 +142,13 @@ VGG16 的五个卷积 Block 具有明显的层次化特征：
 ---
 
 ### 2. GoogLeNet：Inception 模块的多分支特征提取思想
-
-<p align="center">
-  <img src="./assets/images/googlenet_inception.png" width="760" alt="GoogLeNet Inception module">
-</p>
-
 GoogLeNet 与 VGG16 最大的不同在于，它不再只依赖单一路径的深层卷积堆叠，而是引入了 **Inception 模块**。Inception 的核心思想是在同一层中并行使用多种尺度的卷积和池化操作，让模型同时提取不同感受野下的图像特征。
 
 一个典型 Inception 模块可以理解为四条并行分支：
 
-```mermaid
-flowchart LR
-    A[Input Feature Map] --> B[1×1 Conv]
-    A --> C[1×1 Conv + 3×3 Conv]
-    A --> D[1×1 Conv + 5×5 Conv]
-    A --> E[3×3 MaxPool + 1×1 Conv]
-    B --> F[Concat on Channel Dimension]
-    C --> F
-    D --> F
-    E --> F
-```
+<p align="center">
+  <img src="./assets/images/googlenet_inception.png" width="500" alt="GoogLeNet Inception module">
+</p>
 
 在 `GoogLeNet/model.py` 中，我重点理解并实现了以下结构设计：
 
